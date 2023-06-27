@@ -9,6 +9,7 @@
 
 ## About This project
 
+I've named it pinterest clone but doesn't even come close to it, so yeah. Sorry.
 Project was made using laravel 10 with breeze as starting point, I've added image collection per user. And showcase of all images avaiable in the app.
 
 -   [Laravel 10](https://laravel.com/).
