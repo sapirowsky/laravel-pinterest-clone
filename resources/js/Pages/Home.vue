@@ -30,45 +30,49 @@ onMounted(() => {
     <div
         class="relative sm:flex sm:flex-col sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white text-gray-600 dark:text-gray-400"
     >
-        <header class="container h-max flex justify-between py-4 px-2">
-            <div
-                class="cursor-pointer hover:text-gray-900 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-            >
-                <Link
-                    class="text-2xl font-semibold text-gray-600 dark:text-gray-400"
-                    href="/"
-                    >Logo</Link
+        <header
+            class="w-full sm:flex sm:justify-center bg-white dark:bg-gray-800"
+        >
+            <div class="container h-max flex justify-between py-4 px-2">
+                <div
+                    class="cursor-pointer hover:text-gray-900 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                 >
-            </div>
-            <div v-if="canLogin" class="flex items-center">
-                <Link
-                    v-if="$page.props.auth.user"
-                    :href="route('dashboard')"
-                    class="hover:text-gray-900 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                >
-                    Hej,
-                    <span class="font-semibold">
-                        {{ $page.props.auth.user.name }}
-                    </span>
-                    !
-                </Link>
-                <template v-else>
                     <Link
-                        :href="route('login')"
-                        class="font-semibold hover:text-gray-900 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                        >Zaloguj</Link
+                        class="text-2xl font-semibold text-gray-600 dark:text-gray-400"
+                        href="/"
+                        >Logo</Link
                     >
+                </div>
+                <div v-if="canLogin" class="flex items-center">
+                    <Link
+                        v-if="$page.props.auth.user"
+                        :href="route('dashboard')"
+                        class="hover:text-gray-900 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                    >
+                        Hej,
+                        <span class="font-semibold">
+                            {{ $page.props.auth.user.name }}
+                        </span>
+                        !
+                    </Link>
+                    <template v-else>
+                        <Link
+                            :href="route('login')"
+                            class="font-semibold hover:text-gray-900 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            >Zaloguj</Link
+                        >
 
-                    <Link
-                        v-if="canRegister"
-                        :href="route('register')"
-                        class="ml-4 font-semibold hover:text-gray-900 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                        >Zarejestruj</Link
-                    >
-                </template>
+                        <Link
+                            v-if="canRegister"
+                            :href="route('register')"
+                            class="ml-4 font-semibold hover:text-gray-900 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            >Zarejestruj</Link
+                        >
+                    </template>
+                </div>
             </div>
         </header>
-        <main class="container mt-4 mb-4 px-2 pin-showcase">
+        <main class="container my-8 px-2 pin-showcase">
             <Pin
                 v-for="image in images"
                 :key="image.id"
@@ -78,6 +82,13 @@ onMounted(() => {
                 alt="zdjęcie"
             />
         </main>
+        <footer
+            class="w-full sm:flex sm:justify-center bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400"
+        >
+            <div class="container px-2 py-4">
+                Logo 2023, wszystkie prawa zastrzeżone.
+            </div>
+        </footer>
     </div>
 </template>
 

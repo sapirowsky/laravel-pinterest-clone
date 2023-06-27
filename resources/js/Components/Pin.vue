@@ -1,12 +1,19 @@
 <script setup>
+import { Head, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import TrashBin from "@/Components/TrashBin.vue";
+import Download from "@/Components/Download.vue";
 defineProps({
     url: String,
     alt: String,
     index: Number,
     canDelete: Boolean,
+    imageOwner: Boolean,
 });
+const biggerImage = ref(false);
+const toggleBiggerImage = () => {
+    biggerImage.value = !biggerImage.value;
+};
 const show = ref(false);
 const imageToDelete = ref("");
 const imageToDeleteIndex = ref();
@@ -45,16 +52,54 @@ const whatSize = (index) => {
             class="rounded-lg w-full h-full object-cover"
             :src="'./storage/images/' + url"
             :alt="alt"
+            @click="toggleBiggerImage"
         />
-        <span
-            v-if="canDelete"
-            class="absolute rounded-full w-8 h-8 bg-red-500 hover:bg-red-600 top-1 right-1 grid place-items-center"
-            @click="openDeletion(url, index)"
-        >
-            <TrashBin class="w-4/5 h-4/5 text-white" />
-        </span>
+        <div class="absolute top-1 right-1 flex gap-1 flex-wrap">
+            <a
+                v-if="index"
+                :href="'./download/' + url"
+                class="rounded-full w-8 h-8 bg-gray-400 hover:bg-gray-500 grid place-items-center hover:cursor-pointer"
+            >
+                <Download class="w-4/5 h-4/5 text-white" />
+            </a>
+            <span
+                v-if="canDelete || imageOwner"
+                class="rounded-full w-8 h-8 bg-red-500 hover:bg-red-600 grid place-items-center hover:cursor-pointer"
+                @click="openDeletion(url, index)"
+            >
+                <TrashBin class="w-4/5 h-4/5 text-white" />
+            </span>
+        </div>
     </div>
-    <teleport to="body">
+    <teleport to="body" v-if="biggerImage">
+        <div
+            class="fixed inset-0 backdrop-blur-sm"
+            @click="toggleBiggerImage"
+        ></div>
+        <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div
+                class="flex flex-col gap-2 max-h-screen max-w-screen-md bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 container px-2 py-4 rounded-xl"
+            >
+                <div class="flex gap-2 justify-between">
+                    <h1 class="text-xl font-semibold">{{ url }}</h1>
+                    <h1
+                        class="text-xl font-semibold text-red-500 hover:text-red-600 hover:cursor-pointer"
+                        @click="toggleBiggerImage"
+                    >
+                        X
+                    </h1>
+                </div>
+                <div class="grid place-content-center">
+                    <img
+                        class="object-cover w-full rounded-xl"
+                        :src="'/storage/images/' + url"
+                        alt="zdjecie"
+                    />
+                </div>
+            </div>
+        </div>
+    </teleport>
+    <teleport to="body" v-if="show">
         <transition leave-active-class="duration-200">
             <div
                 v-show="show"

@@ -26,7 +26,7 @@ Route::get('/', function () {
     ]);
 });
 Route::get('/images', [ImageController::class, 'show']);
-
+Route::get('/download/{imageName}', [ImageController::class, 'getImage'])->name('download.image');
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

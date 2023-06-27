@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -38,17 +39,19 @@ class ImageController extends Controller
 
         $savedImage = \ImageEdt::make($image)->save($path);
         
-        // Create image model
+        // Create & return image model
  
-        $image = Image::create([
+        return Image::create([
             'creator' => Auth::id(),
             'name' => $image_name,
             'ext' => $image_extension,
             'size' => $savedImage->filesize(),
         ]);
-     
-        // return image model
-        return $image->name;
+    }
+    public function getImage($image){
+        
+
+        return response()->download(public_path('storage\images\\').$image);
     }
     public function destroy(Request $request){
         $imageId = $request->integer('imageId');
