@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf_token" content="{{csrf_token()}}">
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <title>Logo</title>
         <meta name="description" content="Pinterest clone, ta strona powstała w celu spróbowanie odtworzenia pinterestu aby rozwinąć umiejętności.">
 
         <!-- Fonts -->
