@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/sapirowsky/laravel-pinterest-clone/blob/main/screenshot.png?raw=true" width="400" alt="Image of an working app">
+    <img src="https://github.com/sapirowsky/laravel-pinterest-clone/blob/main/screenshot.png?raw=true" width="900" alt="Image of an working app">
 </p>
 
 ## About This project
