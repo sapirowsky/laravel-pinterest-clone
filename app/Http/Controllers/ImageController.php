@@ -31,22 +31,20 @@ class ImageController extends Controller
 
         // store image
         $image = $request->file('image');
-        $uploadedFile = \ImageEdt::make($image);
-        return ;
-        $path = $uploadedFile->store('public/images');
+        $image_extension = 'webp';
+        $image_name = time().'_'.$image->getClientOriginalName();
+        $image_name = str_replace('.'.$image->extension(), '.'.$image_extension, $image_name);
+        $path = public_path('storage/images'. '/'.$image_name);
 
-        if(!$path ){
-            return response()->json(['error' => 'The file could not be saved.'], 500);
-        }
-        $uploadedFile = $request->file('image');
+        $savedImage = \ImageEdt::make($image)->save($path);
         
         // Create image model
  
         $image = Image::create([
             'creator' => Auth::id(),
-            'name' => $uploadedFile->hashName(),
-            'ext' => $uploadedFile->extension(),
-            'size' => $uploadedFile->getSize(),
+            'name' => $image_name,
+            'ext' => $image_extension,
+            'size' => $savedImage->filesize(),
         ]);
      
         // return image model
