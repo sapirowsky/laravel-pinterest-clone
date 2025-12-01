@@ -14,3 +14,15 @@ What's worth mentioning (i think) images are transformed from original extension
 -   [InertiaJS](https://inertiajs.com/).
 -   [TailwinCSS](https://tailwindcss.com/).
 -   [FilePond](https://pqina.nl/filepond/).
+
+## Usage
+This image uploader was created to show at job interview
+
+in order to lunch it you will need mariadb and update .env with connection
+
+then install packages ad run migration.
+
+License
+The Laravel framework is open-sourced software licensed under the MIT license.
+
+php artisan storage:link
